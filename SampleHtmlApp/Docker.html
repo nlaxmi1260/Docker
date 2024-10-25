@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker</title>
+</head>
+
+<body>
+    <h2>Provisioning ec2 instance to deploy static web site</h2>
+    <p>
+        1 sudo yum update <br>
+        2 sudo yum install nginx <br>
+        3 sudo systemctl start nginx <br>
+        4 sudo systemctl enable nginx <br>
+        5 tar -xvf archive.tar <br>
+        6 sudo mv SampleHtmlApp/ /usr/share/nginx/html/ <br>
+    </p>
+    <h2>Docker File for static html web site</h2>
+    <ol>
+        <li>To create a container with reqired Software with your artifacts</li>
+        <li>FROM: represents base </li>
+        <li>WORKDIR: is the location to place your artifacts</li>
+        <li>COPY: copy your artifacts to WORKDIR</li>
+        <li>EXPOSE: expose required port</li>
+        <li>CMD: execute required command</li>
+        <li><code>
+            # Use the official Nginx base image from Docker Hub <br>
+FROM nginx:alpine <br> <br>
+
+# Set the working directory in the container <br>
+WORKDIR /usr/share/nginx/html <br><br>
+
+# Copy the local HTML files to the Nginx default directory <br>
+COPY . . <br><br>
+
+# Expose port 80 to the outside world <br>
+EXPOSE 80 <br><br>
+
+# Start Nginx <br>
+CMD ["nginx", "-g", "daemon off;"] <br>
+        </code></li>
+    </ol>
+    <h2>Docker Commands</h2>
+    <ol>
+        <li><code>docker build -t [imageName] . </code> : Command to create image from docker file . represents dockerfile present in current directory</li>
+        <li><code>docker run -d -p 8080:80 [imageName]</code> : Command to create container and run, -d run in detach mode, -p to map local port to container exposed port, 8080 is the local port and 80 is the container exposed port</li>
+    </ol>
+    </ol>
+</body>
+
+</html>
