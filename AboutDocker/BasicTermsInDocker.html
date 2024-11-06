@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Styles/Style.css">
+    <title>Basic Terms in Docker</title>
+</head>
+<body>
+    <h3>Basic Terms in Docker</h3>
+        <ol>
+                <li> 
+                    <b> Web Servers </b>: A web server is a software application (or hardware device) that stores, processes, and delivers web pages to clients (usually web browsers) over the Internet. <br>
+                    A web server’s primary role is to serve web pages for a website . A web page can be rendered from a single HTML file, or a complex assortment of resources fitted together. If you want to host your web application on the internet, in many cases you will need a web server. <br>
+                    The most popular open source web servers are currently <b> Apache and Nginx </b>.
+                </li>
+                <li>
+                    <b>Containerisation</b>: The process of containing applications, along with its code and libraries in one environment or container,running on more than one platform to make the DevOps delivary pipeline simplified and portable is known as containerization.
+                    <ol>Key Concepts In Containerisation:
+                        <li>
+                            <b>Containers</b>: Containers are lightweight, standalone and executable software packages that include everything needed to run a piece of software, including the code, runtime , system tools ,liabraries and settings. </li>
+                        <li>
+                            <b>Docker</b>: The most popular platform for containerization is Docker. Docker provides tools to create ,deploy and manage containers. It uses a DockerFile to define the steps to create a container image, which is a snapshot of the container.
+                            <ol> Key concepts & Components of Docker
+                                <li>
+                                    <b>Docker Images </b>:
+                                    <ol>
+                                        <li>
+                                            Definition: A Docker image is a lightweight, standalone, and executable software package that includes everything needed to run a piece of software: the code, runtime, libraries, environment variables, and configuration files.
+                                        </li>
+                                        <li>
+                                                Characteristics:
+                                                Images are read-only; once built, they cannot be modified directly.
+                                                They are layered, meaning each image can inherit from another image, reducing redundancy.
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <b>Docker Containers</b>
+                                    <ol>
+                                        <li>
+                                            Definition: A Docker container is a runnable instance of a Docker image. It is an isolated environment where the application runs, sharing the host OS kernel but with its own file system, processes, and network interfaces.
+                                        </li>
+                                        <li>
+                                            Characteristics:
+                                            Containers can be started, stopped, moved, and deleted independently.
+                                            They can be ephemeral (temporary) or persistent, depending on how they are configured.
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <b>Dockerfile</b> :
+                                    <ol>
+                                        <li>
+                                            Dockerfile
+                                            Definition: A Dockerfile is a text file that contains a series of instructions for building a Docker image. It specifies the base image to use, the application files to include, and the commands to run when creating the image.
+                                        </li>
+                                        <li>
+                                            Common Instructions:
+                                                FROM: Specifies the base image. <br>
+                                                RUN: Executes commands in the image during the build process. <br>
+                                                COPY or ADD: Copies files from the host into the image.
+                                                <br>
+                                                CMD or ENTRYPOINT: Specifies the command to run when a container is started from the image.
+                                        </li>
+                                        <li>
+                                            Example: A Dockerfile that installs a web server and copies application files into the image.
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <b>Docker Hub</b>: 
+                                    <ol>
+                                        <li>
+                                            Definition: Docker Hub is a cloud-based registry service for sharing and storing Docker images. It allows users to upload their images and download images created by others.
+                                        </li>
+                                        <li>
+                                            Features:
+                                            Public and private repositories for images.
+                                            Official images maintained by Docker and the community.
+                                            Versioning and tagging of images for easier management.
+                                        </li>
+                                        <li>
+                                            Example: Pulling the official nginx image from Docker Hub using docker pull nginx.
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li><b>Volume</b>:
+                                    <ol>
+                                        <li>
+                                            Definition: A Docker volume is a persistent storage mechanism used to store data generated and used by Docker containers. Volumes are managed by Docker and exist outside the container’s file system.
+                                        </li>
+                                        <li>
+                                            Characteristics:
+                                            Data in volumes can persist even after containers are stopped or deleted.
+                                            Volumes can be shared between multiple containers.  
+                                        </li>
+                                        <li>
+                                            Example: Using a volume to store a database’s data files so that they remain intact between container restarts.
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li><b>Network</b>:
+                                <ol>
+                                    <li>
+                                        Definition: Docker networks provide communication between containers and the host system. Docker allows you to create isolated networks for containers to communicate.
+                                    </li>
+                                    <li>
+                                        Types of Networks:
+                                        <ol>
+                                            <li>
+                                                Bridge: The default network mode for Docker containers; allows containers to communicate on the same host.
+                                            </li>
+                                            <li>Host: Uses the host's networking stack directly.
+                                            </li>
+                                            <li>
+                                                Overlay: Allows containers on different Docker hosts to communicate, useful for multi-host setups (like Docker Swarm).
+                                            </li>
+                                            <li>macvlan</li>
+                                            <li>None</li>
+                                            <li>Ipvlan</li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        Example: Creating a bridge network to allow web and database containers to communicate.
+                                    </li>
+                                </ol>
+                                </li>
+                                <li>
+                                    <b>Docker Compose</b>:
+                                    <ol>
+                                        <li>
+                                            Definition: Docker Compose is a tool for defining and managing multi-container Docker applications using a docker-compose.yml file. It allows you to specify the services, networks, and volumes for your application.
+                                        </li>
+                                        <li>
+                                            Features:
+                                            Simplifies the orchestration of multiple containers.
+                                            Supports defining services, scaling, and managing the lifecycle of the application.
+                                        </li>
+                                        <li>
+                                            Example: Using Docker Compose to run a web application alongside a database in separate containers defined in a single YAML file.
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li><b>Docker Swarm</b>:
+                                    <ol>
+                                        <li>
+                                            Definition: Docker Swarm is Docker's native clustering and orchestration tool, allowing you to manage a cluster of Docker engines as a single virtual Docker engine.
+                                        </li>
+                                        <li>
+                                            Characteristics:
+                                            Provides high availability and load balancing.
+                                            Allows scaling of services up or down easily.
+                                        </li>
+                                        <li>
+                                            Example: Deploying a multi-container application across several Docker hosts for improved reliability and performance.
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li><b>Docker Registries</b>:
+                                <ol>
+                                    <li>
+                                        Definition: A Docker registry is a storage and distribution system for Docker images. Docker Hub is a public registry, while you can also set up private registries.
+                                    </li>
+                                    <li>
+                                        Functionality:
+                                        Allows pushing and pulling of images.
+                                        Manages image versions and access control.
+                                    </li>
+                                    <li>
+                                        Example: Using a private Docker registry to store proprietary images for internal use.
+                                    </li>
+                                </ol>
+                                </li>
+                                <li><b>Orchestration</b>
+                                    <ol>
+                                        <li>Definition: Orchestration refers to the automated management of containerized applications, including deployment, scaling, and networking. Tools like Kubernetes and Docker Swarm handle orchestration.
+                                        </li>
+                                        <li>Purpose:
+                                            Ensures that applications are deployed in the desired state.
+                                            Manages resource allocation and load balancing.
+                                        </li>
+                                        <li>Example: Using Kubernetes to orchestrate a microservices architecture where different services are deployed in separate containers.
+                                        </li>
+                                    </ol>
+                                </li>
+                                <!-- <li><b>Docker In DevOps Pipeline</b></li>
+                                <li><b>Docker Workflow In DevOps</b></li>
+                                <li><b>Docker Architecture</b></li>
+                                <li><b>Docker Commands</b></li>
+                                <li><b>Best Practices Of Docker in DevOps</b></li>
+                                <li><b>Challenges Of Using Docker In DevOps</b></li>
+                                <li><b>Docker Ecosystem In DevOps</b></li> -->
+                            </ol>
+                        </li>
+                        <li>Containerization In DevOps
+                            <ul>
+                                <li>Development</li>
+                                <li>Testing</li>
+                                <li>Staging</li>
+                                <li>Production</li>
+                                <li>Monitoring</li>
+                                <li>Scaling</li>
+                            </ul>
+                        </li>
+                        <li>Use Case Of Containerization
+                            <ul>
+                                <li>MicroServices</li>
+                                <li>Multi-cloud</li>
+                                <li>Developer Productivity</li>
+                                <li>Big Data</li>
+                                <li>DevOps</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+            <li>Container Benefits:
+                <ol>
+                    <li>Consistency Across Environments </li>
+                    <li>Scalability</li>
+                    <li>Isolation</li>
+                    <li>Efficiency</li>
+                    <li>Portability</li>
+                    <li>CI/CD</li>
+                </ol>
+            </li>
+            <li>
+                <b> Docker VS Virtual Machine</b> :
+                unlike VMs that virtualize entire hardware ,Docker containers share the host OS Kernel , making them more efficient and faster. COntainers use fewer resources and start almost instantly.
+            </li>
+            </li>
+        </ol>
+</div>
+</body>
+</html>
