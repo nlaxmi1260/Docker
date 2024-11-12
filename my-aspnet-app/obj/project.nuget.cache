@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "T7GARYd68/SsMgqhmmqaHmZzKu1qkmdtdJ7W6Z6uY96H5Zlc/HXqEq/4nFYVJ4OBQtHpbPECxnxlap1qx0AOnA==",
+  "dgSpecHash": "AOft+Wx3B2Iy4o3j/e2HqCujIUph2t44cASh2SuOa7krG3QHy+Ota0xcO1yp8K50Sd7dVhWwhWmqRX721j2+3w==",
   "success": true,
-  "projectFilePath": "/Users/nagalakshmi/Developer/Lakshmi/Practice/Docker/my-aspnet-app/my-aspnet-app.csproj",
+  "projectFilePath": "/Users/nagalakshmi/Developer/Lakshmi/Practice/5.Docker/my-aspnet-app/my-aspnet-app.csproj",
   "expectedPackageFiles": [
     "/Users/nagalakshmi/.nuget/packages/microsoft.netcore.app.ref/7.0.16/microsoft.netcore.app.ref.7.0.16.nupkg.sha512",
     "/Users/nagalakshmi/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.16/microsoft.aspnetcore.app.ref.7.0.16.nupkg.sha512",

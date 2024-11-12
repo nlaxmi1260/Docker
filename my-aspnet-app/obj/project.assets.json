@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nagalakshmi/Developer/Lakshmi/Practice/Docker/my-aspnet-app/my-aspnet-app.csproj",
+      "projectUniqueName": "/Users/nagalakshmi/Developer/Lakshmi/Practice/5.Docker/my-aspnet-app/my-aspnet-app.csproj",
       "projectName": "my-aspnet-app",
-      "projectPath": "/Users/nagalakshmi/Developer/Lakshmi/Practice/Docker/my-aspnet-app/my-aspnet-app.csproj",
+      "projectPath": "/Users/nagalakshmi/Developer/Lakshmi/Practice/5.Docker/my-aspnet-app/my-aspnet-app.csproj",
       "packagesPath": "/Users/nagalakshmi/.nuget/packages/",
-      "outputPath": "/Users/nagalakshmi/Developer/Lakshmi/Practice/Docker/my-aspnet-app/obj/",
+      "outputPath": "/Users/nagalakshmi/Developer/Lakshmi/Practice/5.Docker/my-aspnet-app/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/nagalakshmi/.nuget/NuGet/NuGet.Config"
