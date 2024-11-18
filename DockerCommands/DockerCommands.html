@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Commands</title>
+</head>
+<body>
+    <h3>Docker Commands</h3>
+    <ol>To become a Docker expert, you must understand key commands for
+        <li>
+            <b>Basic Docker Commands</b>: 
+            These commands cover the core functionality for working with <b>     containers, images, and volumes </b> .
+            <ul>
+                <li><b>docker --version</b>: Display the installed Docker version.
+                </li>
+                <li><b>docker info</b>: Display system-wide information about the Docker installation, including the number of containers, images, and the storage driver in use.
+                </li>
+                <li><b>docker help</b>: Show help for Docker commands.
+                </li>
+            </ul>
+        </li>
+        <li><b>Container Lifecycle Management </b> :
+            <ul>Managing the lifecycle of containers — running, stopping, and removing is crucial for containerized applications :
+                <li><b>docker build -t &lt; Image_name &gt; .</b> : To create image from the dockerFile. Here . refers to dockerfile in the current directory </li>
+                <li>
+                    <b>docker run</b>:Start a new container from an image. You can pass different options to control the container behavior:
+                    <ul>
+                        <li><b>docker run -it &lt; Image_name &gt; </b>: Start an interactive container</li>
+                        <li><b>docker run -d &lt; Image_name &gt;</b>: Run in detached mode(background)</li>
+                        <li><b> docker run --name &lt; ContainerName &gt; &lt; ImageName &gt;</b>: Start a container with a specific container name. </li>
+                        <li><b>docker run --network &lt; network-name &gt; &lt; image-name &gt; </b>: Run a container attached to a specific network.</li>
+                        <li><b>docker run -d -p 8080:80 &lt;image-name &gt;</b>: 8080 is host port and 80 is the container port</li>
+                        <li><b>docker run -volume</b></li>
+                        <li><b>docker run --subnet</b></li>
+                        <li><b>docker run </b></li>
+                    </ul>
+                </li>
+                <li>
+                    <b>docker ps</b>: List running containers.
+                    <ul>
+                        <li><b>docker ps -a</b>: List all containers (including stopped)</li>
+                    </ul>
+                </li>
+                <li><b> docker stop </b> : Stop a running container. <b>docker stop &lt; container-id &gt; </b></li>
+                <li><b> docker start </b>: Start a stopped container.
+                <b> docker start &lt; container-id &gt; </b>
+                </li>
+                <li><b>docker rm </b>: Remove a container. Containers must be stopped before removing them.
+                <ul>
+                    <li><b> docker rm &lt; container-id &gt; </b></li>
+                    <li><b>
+                        docker rm $(docker ps -a -q) 
+                    </b>: Remove all stopped containers</li>
+                </ul>
+                </li>
+                <li><b>docker kill</b>: Forcefully stop a running container.
+                <ul>
+                    <li>
+                        <b>docker kill &lt; container-id &gt; </b>
+                     </li>
+                </ul>
+                </li>
+            </ul>
+        </li>
+        <li><b> Working with Images </b>: Docker images are the core of containerization. Managing and manipulating images effectively is a key skill:
+            <ul>
+                <li>
+                    <b>docker images</b>: List all available images on your local machine. <br>
+                <b>
+                    docker images
+                </b> 
+                </li>
+                <li><b>docker pull</b>: Download an image from Docker Hub or a custom registry. <br>
+                <b>
+                    docker pull &lt; image-name &gt;
+                    </b>
+                </li>
+                <li><b>docker build</b>: Build an image from a Dockerfile. 
+                    <ol>
+                        <li><b>
+                            docker build -t <image-name> .
+                            </b></li>
+                        <li><b>
+                            docker build -t <image-name> dockerfilename
+                            </b> </li>
+                    </ol>
+                </li>
+                <li>
+                    <b>docker rmi</b>: Remove one or more images. <br>
+                <b>
+                    docker rmi &lt; image-id/imageName &gt;
+                    </b>
+                </li>
+                <li>
+                    <b>docker tag</b>: Tag an image for easy reference. <br>
+                    <b>
+                        docker tag &lt;image-id &gt; &lt; repository &gt;:&lt; tag &gt;
+                    </b>
+                </li>
+                <li><b>docker push</b>: Push an image to a remote registry like Docker Hub. <br>
+                    <b>
+                        docker push &lt; repository &gt;:&lt; tag &gt;
+                        </b>
+                </li>
+            </ul>
+        </li>
+        <li><b>Container Interaction</b>: Interacting with running containers is essential for debugging and working with containerized applications
+        <ul>
+            <li><b>docker exec</b>: Run commands inside a running container. <br>
+                <b> docker exec -it &lt; container-id &gt; /bin/bash</b>
+            
+            </li>
+            <li>
+                <b>docker attach</b>: Attach your terminal to a running container’s output. <br>
+            <b>docker attach &lt; contaner-Id &gt; </b>
+            </li>
+            <li><b> docker logs</b>: View the logs of a running or stopped container. <br>
+            <b>docker logs &lt; container-id &gt;</b></li>
+            <li><b>docker inspect</b>: Get detailed information about a container or image in JSON format. <br>
+            <b>docker inspect &lt; contaner_id &gt;</b></li>
+        </ul>
+        </li>
+        <li><b>Networking </b>:
+            Understanding how Docker networking works is key to deploying and managing containers that need to communicate
+            <ul>
+                <li>
+                    <b>docker network ls</b>: List all Docker networks.
+                </li>
+                <li><b>docker network create &lt; network-name &gt; </b> : Create a new Docker network.</li>
+                <li> <b> docker network inspect &lt; network-name &gt;
+                </b> : Display detailed information about a specific network. </li>
+                <li><b>docker network connect &lt; network-name &gt; &lt; container-id &gt;</b> :Connect a container to a network.</li>
+                <li><b>docker run --network &lt; network-name &gt; &lt; image-name&gt; </b>: Run a container attached to a specific network.</li>
+            </ul>
+        </li>
+        <li><b>Volumes & Storage</b>:Containers are ephemeral(having a very short life cycle) by design, but volumes are used to persist data between container restarts or across multiple containers:
+            <ul>
+                <li><b>docker volume ls</b>: List all Docker volumes</li>
+                <li><b>docker volume create &lt; volume-name &gt;</b>: Create a new volume.</li>
+                <li><b>docker run -v &lt;volume-name &gt;:/path/in/container &lt;image-name &gt; </b> : Mount a volume when running a container</li>
+                <li><b>docker volume rm &lt; volume-name &gt; </b>: remove a volume</li>
+                <li><b> docker volume inspect &lt; volume-name &gt;</b> : Get detailed information about a volume.</li>
+            </ul>
+        </li>
+        <li>
+            <b>Container Orchestration (Docker Compose)</b>:Docker Compose simplifies multi-container applications, letting you define <b>services, networks, and volumes </b> in a single file.
+            <ul>
+                <li>
+                    <b> docker compose up -d</b> :Start all services defined in the docker-compose.yml file in detached mode.
+                </li>
+                <li><b>docker compose down</b> :Stop and remove all containers and networks defined in the compose file.</li>
+                <li><b>docker compose logs</b>: View logs from all services.</li>
+                <li><b>docker-compose exec &lt; service-name &gt; &lt;command &gt;</b> : Run a command inside a running service container.</li>
+                <li><b>docker compose build </b> Build or rebuild services.</li>
+            </ul>
+         </li>
+         <li>
+            <b>Advanced Docker Commands</b>: To truly become a Docker expert, you need to understand more advanced commands and concepts for troubleshooting, performance optimization, and cleanup:
+            <ul>
+                <li>
+                    <b>docker prune </b> Clean up unused Docker resources (containers, networks, volumes, and images).
+                    <br>
+                    <b>docker system prune</b>
+                    <br>
+                    <b>docker volume prune</b>
+                </li>
+                <li><b>docker stats</b>:Monitor the real-time performance of running containers.</li>
+                <li><b>docker history  &lt; image-id &gt;</b>Show the history of an image, 
+                    including layers and commands used to create the image</li>
+                <li><b> docker cp &lt; source-path &gt;&lt; container-id &gt;:&lt;destination-path &gt; </b>Copy files between the host and a container.</li>
+                <li><b>docker commit &lt; container-id &gt; &lt; new-image-name &gt;
+                </b> Create a new image from a container's changes.</li>
+            </ul>
+        </li>
+        <li><b>Security Best Practices</b> :Securing Docker containers and images is an important aspect of containerization
+        <ul>
+            <li>
+                <b> docker scan &lt; image-name &gt;</b>: Scan Docker images for known vulnerabilities (with Docker Hub integration)
+            </li>
+            <li>
+                <b>docker run --cap-drop=ALL --name &lt; container-name &gt; &lt;image-name &gt;</b>: Drop unnecessary Linux capabilities to reduce the container’s attack surface.
+            </li>
+            <li>
+                <b> docker run --read-only &lt; image-name &gt; </b> : Run a container with a read-only file system.
+            </li>
+        </ul>
+        </li>
+    </ol>
+</body>
+</html>

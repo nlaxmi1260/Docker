@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Containers and their Operations</title>
+    <link rel="stylesheet" href="../Styles/Style.css">
+</head>
+<body>
+    <h3> Create Containers and their Operations </h3>
+    <ol>
+        <li>create container with dockerhub images
+            <ul>
+                <li>
+                    <b>docker pull &lt; imageName &gt;</b>: To create  image from dockerhub
+                 </li>
+                 <li><b>docker run -it --name &lt; containerName &gt; &lt; imageName &gt; /sh</b>: create a container in interactive mode for firsttime creating container</li>
+                 <li><b>docker start &lt; containerName &gt;</b> : To start the stopping container.</li>
+                 <li>
+                    <b>docker exec -it &lt; containerName &gt; sh</b> :To open container in interactive mode after creating container.
+                 </li>
+                 <li><b>exit </b>: To exit from the container</li>
+            </ul>
+        </li>
+        <li>To create image from dockerfile
+            <ul>
+                <li>Write a docker text file to create a image.
+                    <ol>
+                        <li> Dockerfile is a text file that contains instructions for building a Docker image. The image, once built, can be used to create containers with your application and environment pre-configured.</li>
+                        <li>A Dockerfile consists of a series of instructions, each performing a specific task. Each instruction creates a layer in the Docker image, and these layers are cached to speed up future builds.</li>
+                        <li>Key Instructions: <br>
+                            - FROM: Specifies the base image to use. <br>
+                            - RUN: Executes commands inside the container during the build process. <br>
+                            - COPY: Copies files from your local machine into the container. <br>
+                            - ADD: Similar to `COPY`, but also handles tar files and remote URLs. <br>
+                            - WORKDIR: Sets the working directory inside the container. <br>
+                            - CMD: Specifies the default command to run when the container starts. <br>
+                            - ENTRYPOINT: Sets the command to run, but allows arguments to be passed at runtime. <br>
+                            - EXPOSE: Informs Docker that the container listens on specified network ports. <br>
+                            - ENV: Sets environment variables inside the container. <br>
+                            - VOLUME: Creates mount points for data persistence. <br>
+                            - USER: Specifies the user to run commands as. <br>
+                            - ARG: Defines build-time variables (can be passed at build time).</li>
+                            <li><b>docker build -t my-node-app .</b>: build image from docker file</li>
+                            <li><b> docker run -p 3000:3000 my-node-app</b>
+                            </li>
+                            <li><b>exit</b></li>
+                            <li><b>docker start containerName</b></li>
+                            <li><b>docker exec -it containerName sh</b> : open the container in interactivemode.</li>
+                    </ol>
+                </li>
+            </ul>
+        </li>
+        <li>lab : create a container from image
+            <ul>
+                <li><b>docker network ls</b></li>
+                <li><b>docker network inspect networkName</b></li>
+                <li><b>docker rm -f customnginxContainer</b> : to remove a container</li>
+                <li><b>docker run -d --name myapp -p 8081:8080  aputra/myapp-188:v3</b></li>
+                <li><b>curl localhost:8082/api/info</b></li>
+            </ul>
+        </li>
+       
+        <li>Docker allows you to create custom bridge networks
+            <ol>
+                <li>
+                    docker network command to create custom bridge networks for nginx ImageName.
+                    <b>
+                        docker run -d --name login nginx:latest
+                    </b><br>
+                    <b>
+                        docker run -d --name c1  nginx:latest
+                    </b>
+                </li>
+            </ol> 
+        </li>
+        <li>To get ip address of container 
+            <b>docker inspect c1</b>
+        </li>
+        <li>To get idAddress of host machine 
+            <b> ipconfig getifaddr en0</b>
+        </li>
+        <li>To login to the container
+            <b> docker exec -it c1 /bin/bash </b>
+        </li>
+        <li>To ping any other system  from the container we need to install ping 
+        <b>
+             $ apt update <br>
+             $ apt-get install iputils-ping -y <br>
+             To check ping working or not 
+             $ ping 172.17.0.4
+             $ ping google.com
+
+        </b>
+    </li>
+    <li>Network:
+        <ol>
+            <li>To know list of networks <br>
+                <b> docker network ls </b>
+            </li>
+
+            <li>To create a container  with a specific network name  <br>
+                <b>  docker run -d --network Web_bl --name bl custom_nginx </b>
+            </li>
+        </ol>
+        
+    </li>
+    
+    
+    </ol>
+</body>
+</html>
