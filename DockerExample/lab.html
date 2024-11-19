@@ -57,25 +57,34 @@
                 <li><b>docker network inspect networkName</b></li>
                 <li><b>docker rm -f customnginxContainer</b> : to remove a container</li>
                 <li><b>docker run -d --name myapp -p 8081:8080  aputra/myapp-188:v3</b></li>
-                <li><b>curl localhost:8082/api/info</b></li>
-            </ul>
-        </li>
-       
-        <li>Docker allows you to create custom bridge networks
-            <ol>
                 <li>
-                    docker network command to create custom bridge networks for nginx ImageName.
-                    <b>
-                        docker run -d --name login nginx:latest
-                    </b><br>
-                    <b>
-                        docker run -d --name c1  nginx:latest
-                    </b>
+                    <ol>bridge types     
+                        <li>default bridge :<b>curl localhost:8080/api/info</b>: will get result from container ie this is default bridge.</li>
+                        <li><b>curl &lt; containerName &gt;:8080/api/info</b>: will not get details becoze of default network</li>
+                        <li>custom bridge:
+                            <ol>
+                                <li>create network <b> docker network create &lt; networkname &gt;</b>
+                                </li>
+                                <li>create network with particular CIDR range 
+                                    <b>docker network create customnetwork --subnet 10.0.0.0/19 --gateway 10.0.0.1 </b>
+                                </li>
+                                <li>inspect and check ipaddress 
+                                    <b> docker network inspect &lt; networkname &gt; </b>
+                                </li>
+                                <li>create containers with custom bridge network <b>
+                                    docker run -d --name myapp -p 8081:8080 --network my-net aputra/myapp-188:v3
+                                </b></li>
+                                <li><b>curl localhost:8080/api/info</b> :will get result </li>
+                                <li><b>curl &lt;containerName &gt;:8080/api/info</b> : will get result bcoz of custom bridge network ie with DNS</li>
+                            </ol>
+                        </li>
+
+                    </ol>
                 </li>
-            </ol> 
-        </li>
-        <li>To get ip address of container 
-            <b>docker inspect c1</b>
+                <li>In host machine bcoz of port mapping we get result with ipaddress but not with DNS
+                    <b>curl localhost:8081/api/info</b>
+                </li>
+            </ul>
         </li>
         <li>To get idAddress of host machine 
             <b> ipconfig getifaddr en0</b>
@@ -83,30 +92,6 @@
         <li>To login to the container
             <b> docker exec -it c1 /bin/bash </b>
         </li>
-        <li>To ping any other system  from the container we need to install ping 
-        <b>
-             $ apt update <br>
-             $ apt-get install iputils-ping -y <br>
-             To check ping working or not 
-             $ ping 172.17.0.4
-             $ ping google.com
-
-        </b>
-    </li>
-    <li>Network:
-        <ol>
-            <li>To know list of networks <br>
-                <b> docker network ls </b>
-            </li>
-
-            <li>To create a container  with a specific network name  <br>
-                <b>  docker run -d --network Web_bl --name bl custom_nginx </b>
-            </li>
-        </ol>
-        
-    </li>
-    
-    
     </ol>
 </body>
 </html>
