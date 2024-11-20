@@ -10,6 +10,6 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 echo "This file was created at $TIMESTAMP" > /output/timestamp_$TIMESTAMP.txt
 
 # Wait for 45 seconds
-sleep 45
+sleep 15
 
 done

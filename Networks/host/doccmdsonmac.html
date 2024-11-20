@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ol>
+        <li>docker run -d --name myapp -p 8081:8080 aputra/myapp-188:v3
+            8766  docker ps
+            8767  docker ps -a
+            8768  docker inspect myapp
+            8769  curl http://localhost:8080/8080/info
+            8770  curl localhost:8081/api/info
+            8771  docker run -d --name myapp -p 8081:8080 aputra/myapp-188:v3
+            8772  docker inspect myapp
+            8773  curl 172.17.0.2:8080/api/info
+            8774  CLEAR
+            8775  cd ..
+            8776  cd SampleHtmlApp
+            8777  docker build -t samplehtmlapplication .
+            8778  docker images
+            8779  docker build -t samplehtmlapplication .
+            8780  docker images
+            8781  docker build -t myapplication .
+            8782  docker images
+            8783  cat Dockerfile
+            8784  docker run -d --name myhtmlapp -p 8080:80 myapplication .
+            8785  docker ps
+            8786  docker run -d --name myhtmlapp -p 8080:80 myapplication
+            8787  docker ps
+            8788  curl localhost:8080
+            8789  ls
+            8790  curl localhost:8080/Home.html
+            8791  docker stop myapplication
+            8792  docker stop myhtmlapp
+            8793  docker ps
+            8794  curl localhost:8080/Home.html
+            8795  docker start myhtmlapp
+            8796  docker ps
+            8797  curl localhost:8080/Home.html
+            8798  docker inspect myhtmlapp
+            8799  curl 172.17.0.2/index.html
+            8800  curl 172.17.0.2/Home.html
+            8801  ping 172.17.0.2
+            8802  docker ps
+            8803  docker run -d --name myappv2 -p 8081:80 myapplication
+            8804  docker ps
+            8805  docker inspect myapp2
+            8806  docker inspect myappv2
+            8807  ping 172.17.0.3
+            8808  curl localhost:8081/Home.html
+            8809  curl localhost:8080/Home.html
+            8810  docker inspect myappv2
+            8811  docker exec -it myappv2 /bin/sh
+            8812  docker exec -it myhtmlapp /bin/sh
+            8813  docker rm -f myappv2 myhtmlapp
+            8814  docker ps
+            8815  docker network ls
+            8816  docker network create my-bridge-net
+            8817  docker network ls
+            8818  docker network inspect my-bridge-net
+            8819  docker network inspect bridge
+            8820  docker network inspect my-bridge-net
+            8821  docker network create my-bridge-net1
+            8822  docker network inspect my-bridge-net1
+            8823  docker network rm my-bridge-net my-bridge-net1
+            8824  docker network ls
+            8825  docker network create my-custom-net --subnet 10.0.0.0/19 --gateway 10.0.0.1
+            8826  docker newwork ls
+            8827  docker network ls
+            8828  docker inspect my-custom-net
+            8829  docker network rm my-custom-net
+            8830  docker network ls
+            8831  docker network create my-bridge-net --subnet 10.0.0.0/19 --gateway 10.0.0.1
+            8832  docker network ls
+            8833  docker inspect my-bridge-net
+            8834  docker run -d --name myapp -p 8080:80 myapplication
+            8835  docker ps
+            8836  docker rm -f myapp
+            8837  docker run -d --name myapp -p 8080:80  --network my-bridge-net myapplication
+            8838  docker inspect myapp
+            8839  docker run -d --name myappv1 -p 8081:80  --network my-bridge-net myapplication
+            8840  docker inspect myappv1
+            8841  curl localhost:8080/Home.html
+            8842  curl localhost:8081/Home.html
+            8843  docker exec -it myapp sh
+            8844  history
+            8845  docker rm -f myapp myappv1
+            8846  docker network rm my-bridge-net
+            8847  docker ps
+            8848  docker network ls
+            8849* ssh -i ~/Developer/Lakshmi/MyLinuxKey.pem ubuntu@43.204.141.213
+            8850  curl 172.31.13.167/api/info
+            8851* docker run -d --name myapp -p 8081:8080  aputra/myapp-188:v3
+            8852* docker ps
+            8853* docker inspect myapp
+            8854* ping 172.17.0.2
+            8855* curl localhost:8081/api/info
+            8856* curl 172.17.0.2/api/info
+            8857* curl 172.17.0.2:8080/api/info
+            8858* ssh -i ~/Developer/Lakshmi/MyLinuxKey.pem ubuntu@43.204.141.213
+            8859  ping 172.17.0.3
+            8860* docker ps
+            8861* docker inspect myapp
+            8862* curl 172.17.0.2:8080/api/info
+            8863* curl localhost:8081/api/info</li>
+    </ol>
+</body>
+</html>

@@ -6,45 +6,45 @@
     <title>Docker Volume</title>
   </head>
   <body>
-    <ol>
-      <h3>Volume lab</h3>
-      <li> docker volume ls</li>
-      <li>docker build -t filegen .</li>
-      <li>docker run -d --name myfileapp filegen</li>
-      <li>docker volume create myfiles</li>
-      <li>docker volume ls</li>
-      <li>docker volume inspect myfiles</li>
-      <li>docker run -d --name myfileapp -v myfiles:/output filegen</li>
-      <li>docker exec -it myfileapp bash</li>
-      <li>ls -l</li>
-      <li>exit</li>
-      <li>docker volume inspect myfiles</li>
-      <li>docker run -d --name myfileapp1 -v myfiles:/output filegen</li>
-      <li>docker volume inspect myfiles</li>
-      <li>
-        docker run -d --name myfileapp --mount
-        type=volume,source=myfiles,target=/output filegen
+    <h3>Docker volume</h3>
+    <p>
+      Docker volumes and storage are essential concepts for managing persistent data in containerised applications. They provide a way to store data outside of the container’s file system, ensuring that the data persists even when the container is stopped or removed. Let’s explore Docker volumes in detail, including types, use cases, and examples.
+    </p>
+    <li>
+    <ol>Types of Docker Storage
+      <li><b>Volumes </b>: Docker volumes are managed by Docker itself and are stored in a part of the host filesystem that is managed by Docker. They are the preferred method for persisting data.
+        <ul>Volume lab
+          <li> docker volume ls</li>
+          <li>docker build -t filegen .</li>
+          <li>docker run -d --name myfileapp filegen</li>
+          <li>docker volume create myfiles</li>
+          <li>docker volume ls</li>
+          <li>docker volume inspect myfiles</li>
+          <li>docker run -d --name myfileapp -v myfiles:/output filegen</li>
+          <li>docker exec -it myfileapp bash</li>
+          <li>ls -l</li>
+          <li>exit</li>
+          <li>docker volume inspect myfiles</li>
+          <li>docker run -d --name myfileapp1 -v myfiles:/output filegen</li>
+          <li>docker volume inspect myfiles</li>
+          <li>docker volume data will be persistent even container is removed in docker volume</li>
+        </ul>
       </li>
-      <li>docker inspect myfileapp </li>
-
-      <h3>Bind mount lab -- host</h3>
-      <li>
-        docker run -d --name myfileapp -v
-        /Users/mreddy/Developer/Mallikarjun/GitRepository/DevopsZeroToHero/Docker/DockerVolume:/output
-        filegen
+      <li><b>Bind Mounts </b>:Bind mounts allow you to specify an exact path on the host machine. This method links a host directory or file to a container. It’s useful for development environments where you want real-time changes reflected inside the container.Any file created in /path/to/mydata on the host will be visible in /data inside the container
+        <ol>Bind Mounts lab
+          <li><b>mkdir mycontainerdata </b></li>
+              <li><b>docker run -d --name &lt; containerName &gt;  --mount type=bind,source=/Users/nagalakshmi/Developer/Lakshmi/Practice/5.Docker/DockerVolume/mycontainerdata,target=/output volumeimg</b>
+              </li>
+              <li>here data is stored in host system</li>
+        </ol>
+      
       </li>
-      <li>docker inspect myfileapp </li>
-
-      <li>
-        docker run -d --name myfileapp1 -v
-        /Users/mreddy/Developer/Mallikarjun/GitRepository/DevopsZeroToHero/Docker/DockerVolume:/output
-        filegen
-      </li>
-      <li>docker inspect myfileapp </li>
-
-      <h3>tmpfs mount</h3>
-      <li>docker run -d --name myfileapp --mount type=tmpfs,target=/output filegen</li>
-      <li>docker inspect myfileapp </li>
     </ol>
+      <ol>
+      <b>tmpfs mount </b>:`tmpfs` mounts are used to store data in memory rather than on disk. This can be useful for sensitive data that you do not want to write to disk or for temporary data that does not need to persist.
+          <li>docker run -d --name myfileapp --mount type=tmpfs,target=/output filegen</li>
+          <li>docker inspect myfileapp </li>
+      </ol>
+</li>
   </body>
 </html>

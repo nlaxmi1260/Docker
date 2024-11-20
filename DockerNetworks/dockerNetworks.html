@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Network Types</title>
+</head>
+<body>
+    <h3>Docker Networking</h3>
+    <p>
+        Docker networking is a crucial aspect of containerized applications, allowing containers to communicate with each other and with external systems. Understanding Docker networks can help you design more efficient and scalable applications.
+    </p>
+    <ol>Docker Network Types
+        <li><b>default bridge network</b>: This is the default network type used by Docker. When you create a container, it is connected to a bridge network if no other network is specified. Containers on the same bridge network can communicate with each other using their container names as hostnames i.e with ipaddress but not with DNS.
+            <ul>Limitations of Default Bridge Network:
+                <li>Cannot use container names: Containers can only communicate with each other by IP address, not by container name (unless using custom configurations such as Docker DNS or explicit link flags).</li>
+                <li>Limited configuration: You cannot easily configure the subnet, gateway, or other network options unless you create a custom bridge network.</li>
+            </ul>
+        </li>
+        <li><b>custom bridge network</b>: A custom bridge network is a user-defined bridge network that offers more flexibility than the default bridge network. When you create a custom bridge network, you can specify the subnet, gateway, and other network settings. Additionally, custom bridge networks allow containers to communicate using container names as hostnames, making them more user-friendly for application communication.
+        <ul>Advantages of Custom Bridge Network:
+            <li>Container name resolution: Containers can use each other’s names (DNS) to communicate, making setup and configuration easier.</li>
+            <li>Customization: You can specify IP address ranges, subnets, and other network settings, providing more control over the environment</li>
+            <li>Isolation: Custom networks are isolated from other containers and networks by default, improving security and organization.</li>
+        </ul>
+        custom bridge network is ideal for more complex applications where containers need to communicate easily using names, or when you require more control over network settings. It's a better choice for production environments or applications where containers must have predictable network behavior.
+        </li>
+        <li><b>host network</b>: mac does not support host network.
+            The host network mode essentially makes the container share the host machine’s network stack. This means that the container’s network interfaces are directly tied to the host’s interfaces, and the container uses the host's IP address. <br>
+            Characteristics:
+                The container will not have its own IP address but will use the host's IP. <br>
+                It is useful for applications that need high-performance networking or when there is no need for isolation between containers and the host. <br>
+                The container does not have network isolation from the host, which may be a security concern. <br>   
+        <ul>For host network execise
+            <li>create a ec2 instance -amazon linux</li>
+            <li>In ec2 instance -> install docker <br>
+            <b>sudo yum install docker </b>
+            </li>
+            <li><b>sudo yum install docker</b>: update docker</li>
+            <li><b>docker --version</b></li>
+            <li><b>sudo service docker start</b> : start docker service</li>
+            <li><b>sudo usermod -a -G docker ec2-user</b> :add ec2-user to the docker group</li>
+            <li><b>sudo docker run -d --name myapp --network host aputra/myapp-188:v3</b> : create a docker container</li>
+            <li><b>exit the container and reopen the container</b></li>
+            <li><b>ssh -i ~/Developer/Lakshmi/MyLinuxKey.pem ec2-user@13.127.234.224</b></li>
+            <li><b>docker inspect myapp</b></li>
+            <li><b>ip addr</b></li>
+            <li><b>curl 172.31.7.206:8080/api/info</b></li>
+            <li><b>docker network inspect host</b></li>
+            <li>When to Use Host Network: <br>
+                High-performance networking: when containers need to interact heavily with the host or when using certain network protocols.
+                <br>
+                Avoid the overhead of container network isolatio</li>
+        </ul>
+        </li>
+        <li><b>none network : The none network mode is used when you do not want your container to have any network connectivity. It essentially disables all networking for the container. This mode is typically used for containers that do not need network access or for advanced use cases such as running isolated applications with strict security. <br>
+            Characteristics:
+            No network access to or from the container. <br>
+            The container cannot communicate with any other containers or the outsid</b>
+            <ul>
+                <li><b>docker run -d --name myapp2 --network none  aputra/myapp-188:v3</b></li>
+                <li><b>docker network inspect none</b></li>
+                <li><b>docker inspect myapp2</b></li>
+                <li><b>docker exec -it myapp2 sh</b> : it is in loopback interface which dont have any ip address.</li>
+            </ul>
+        </li>
+        <li><b>ipvlan network</b>:
+        <ul>use ipvlan when
+            <li>You need containers to have their own IPs but **don’t require** unique MAC addresses for each container.
+            </li>
+            <li>You need better **network routing control** and performance.</li>
+            <li>You are working with **IP-based networking** where containers don’t need to interact as fully independent devices on the physical network.
+            </li>
+            <li> <b>docker network create  -d ipvlan --subnet=172.31.7.2/20 --gateway=172.31.7.3 -o ipvlan_mode=l2 -o parent=enX0 my-ipvlan-net</b> </li>
+            <li><b>docker run -d  --name myapp --network my-ipvlan-net aputra/myapp-188:v3</b></li>
+            <li><b>docker network inspect my-ipvlan-net</b></li>
+            <li><b>docker inspect myapp</b></li>
+        </ul>
+        </li>
+        <li><b>macvlan network</b>
+        <ul>use macvlan when :
+            <li>Containers need to be treated as fully independent network devices with their own MAC and IP addresses (e.g., for network management, legacy applications, or special external device communication).
+            </li>
+            <li>
+                You need containers to be visible on the physical network, with unique MAC addresses, and interact with external systems (e.g., physical servers, network appliances).
+            </li>
+            <li><b>ip addr</b>: check enX0 ipaddress
+            </li>
+            <li><b>docker network create -d macvlan --subnet=172.31.7.0/24 --gateway=172.31.7.1 -o parent=enX0  my-macvlan-net</b></li>
+            <li><b>docker network inspect my-macvlan-net</b></li>
+            <li><b> docker run -d --name myapp --network my-macvlan-net aputra/myapp-188:v3</b></li>
+            <li><b>docker inspect myapp</b></li>
+        </ul>
+        </li>
+        <li><b>overlay network</b></li>
+    </ol>
+</body>
+</html>

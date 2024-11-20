@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ol>
+        <li>docker ps
+            2  docker inspect myapp
+            3  docker network inspect host
+            4  ip addr
+            5  docker rm -f myapp
+            6  docker ps
+            7  docker run -d --name myapp aputra/myapp-188:v3
+            8  docker inspect myapp
+            9  ping 172.17.0.2
+           10  docker network create my-bridge
+           11  docker network ls
+           12  docker run -d --name myapp --network my-bridge aputra/myapp-188:v3
+           13  docker run -d --name myapp1 --network my-bridge aputra/myapp-188:v3
+           14  curl myapp1:8080/api/info
+           15  docker inspect myapp1
+           16  curl 172.18.0.2:8080/api/info
+           17  docker ps
+           18  docker network inspect my-bridge
+           19  docker network ls
+           20  history
+           21  docker ps
+           22  docker rm -f myapp myapp1
+           23  docker ps
+           24  docker network rm my-bridge
+           25  docker network create my-bridge-net
+           26  docker network ls
+           27  docker run -d --name myapp --network my-bridge-net  aputra/myapp-188:v3
+           28  docker run -d --name myapp1 --network my-bridge-net  aputra/myapp-188:v3
+           29  docker ps
+           30  docker inspect myapp
+           31  curl 172.18.0.2:8080/api/info
+           32  docker exec -it myapp
+           33  docker exec -it myapp sh
+           34  curl 172.18.0.3:8080/api/info
+           35  history</li>
+    </ol>
+</body>
+</html>

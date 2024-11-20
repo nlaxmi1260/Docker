@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deploying Static html page on ec2 instance</title>
+</head>
+<body>
+    <h3>Deploying Static html page on ec2 instance with Nginx</h3>
+    <ol>
+        <li>
+            <ol>
+                <li>Deploying Static html page on ec2 instance with Nginx -In traditional way
+                    <li>Provisioning ->geeting machine
+                        <ul>
+                            <li>Login to aws account -> Launch EC2 instance- Ubuntu</li>
+                            <li>Connect to Ec2 instance through teriminal <br>
+                                <code> ssh -i ~/Developer/Lakshmi/MyLinuxKey.pem ubuntu@3.109.202.199</code>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Configure - install web server
+                        <ul>
+                            <li>install Nginx
+                                <ol>
+                                    <li><code> sudo apt update</code>: To update the server</li>
+                                    <li><code> sudo apt install nginx</code>: To install nginx</li>
+                                    <li><code> service nginx status</code>: To check the status of  nginx -> active/InActive</li>
+                                    <li>To allow http port
+                                        <ol>
+                                            <li>In Ec2 Instance -> Security -> Security groups </li>
+                                            <li>Inbound rules -> Edit inbound rules ->Add role</li>
+                                            <li>
+                                                HTTP -> anywhere IPV4 -> save rule
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <code> 3.110.54.145 </code>: To view the default webpage hosted by the NGINX server, copy the Public IP address of your EC2 instance and paste it into your web browser.
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>Managing the Nginx Process
+                                <ol>
+                                    <li><code> sudo systemctl stop nginx</code>: To stop your web server </li>
+                                    <li><code> sudo systemctl start nginx</code>: To start the web server when it is stopped</li>
+                                    <li><code>
+                                        sudo systemctl restart nginx
+                                    </code>: To stop and then start the service again</li>
+                                    <li><code> sudo systemctl reload nginx </code>: If you are only making configuration changes, Nginx can often reload without dropping connections.</li>
+                                    <li><code>sudo systemctl disable nginx</code>: By default, Nginx is configured to start automatically when the server boots. If this is not what you want, you can disable this behavior by typing:</li>
+                                    <li><code>sudo systemctl enable nginx</code>: To re-enable the service to start up at boot</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Deploying - copy local code to ec2 machine 
+                        <ul>
+                            <li>local code should be archive 
+                                <ul>In Local machine
+                                    <li>To minimise the size</li>
+                                    <li>To get total code at a time</li>
+                                    <li>To convert to <b>tar</b> files.
+                                        <ul>
+                                            <li><code> tar -cvf SampleHtmlApp.tar SampleHtmlApp</code> :to  create a tar file with SampleHtmlApp.tar name</li>
+                                        </ul>
+                                    </li>
+                                    <li>TO copy local code to EC2 instance
+                                        <ul>
+                                            <li>
+                                                <code>
+                                                    scp -i ~/Developer/Lakshmi/MyLinuxKey.pem  ~/Developer/Lakshmi/Practice/Docker/SampleHtmlApp.tar ubuntu@3.110.54.145:/home/ubuntu
+                                                </code>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li></li>
+                                </ul>
+                                <ul>In Ec2 server
+                                    <li>check weather got the war files or not . <code> ls</code></li>
+                                    <li>Extract the war file to get code . <code>
+                                        tar -xvf SampleHtmlApp.tar
+                                    </code></li>
+                                </ul>
+                            </li>
+                            <li>Copy the local HTML files to the Nginx default directory
+                                <ul>
+                                    <li>default Nginx working directory is <code> /usr/share/nginx/html</code></li>
+                                    <li><code> sudo mv SampleHtmlApp /usr/share/nginx/html</code> </li>
+                                    <li>check html files are able to browse on EC2 . 
+                                        <code> http://13.232.224.142/SampleHtmlApp/Home.html</code>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <li>Test the application
+                            <ul>
+                                <li>
+                                    <code> http://13.232.224.142/SampleHtmlApp/Home.html</code>
+                                </li>
+                            </ul>
+                        </li>
+                    </li>
+                </li>
+            </ol>
+        </li>
+       
+        <li>Deploying Static html page on ec2 instance with Nginx - With docker
+            <ol>
+                <li>We need to create a Docker File for required softwares and artifacts
+                    <ul>The docker file has to show 
+                        <li><code> FROM nginx:alpine</code>: </li>
+                        <li><code> WORKDIR /usr/share/nginx/html</code></li>
+                        <li><code> COPY . .</code></li>
+                        <li><code> EXPOSE 80</code></li>
+                        <li><code> CMD ["nginx", "-g", "daemon off;"</code></li>
+                    </ul>
+                </li>
+                <li>To create docker image 
+                    <ul>
+                        <li><code>docker build -t statichtmlwebapp .</code>: statichtmlwebapp is the image name which should be in small letters.</li>
+                    </ul>
+                </li>
+                <li>To create docker container
+                    <ul>
+                        <li><code>
+                            docker run -d -p 8083:80 statichtmlwebapp
+                        </code> : statichtmlwebapp is the image name</li>
+                    </ul>
+                </li>
+            </ol>
+
+        </li>
+    </ol>
+</body>
+</html>
